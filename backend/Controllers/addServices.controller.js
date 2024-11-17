@@ -166,7 +166,7 @@ export const updateService= async(req,res)=>{
     }
 }
 
-//delte service
+//delete service
 export const deleteService=async(req,res)=>{
     const {id}=req.params;
 
@@ -192,7 +192,7 @@ export const deleteService=async(req,res)=>{
           });
         
     } catch (error) {
-        console.error('Error deleting service:', error); // Log the detailed error
+        console.error('Error deleting service:', error); 
 
         return res.status(500).json({
             message:"Internal Server Error"
