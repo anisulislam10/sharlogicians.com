@@ -1,66 +1,67 @@
 import Services from './../Models/addServices.models.js'
+import multer from 'multer';
 import mongoose from 'mongoose';
 
 //add new service
 export const addService = async (req, res) => {
-  const { title, shortDescription, image } = req.body
-
-  if (!title || !shortDescription) {
+  const { title, shortDescription } = req.body;
+  const image = req.file ? req.file.path : ""; 
+ 
+  // Validate required fields
+  if (!title || !shortDescription || !image) {
     return res.status(400).json({
       status: false,
-      message: 'All fields (title, shortDescription, image) are required'
-    })
+      message: 'All fields (title, shortDescription, image) are required',
+    });
   }
 
+  // Validate title length
   if (title.length < 3) {
     return res.status(400).json({
       status: false,
-      message: 'Title must be at least 3 characters long'
-    })
+      message: 'Title must be at least 3 characters long',
+    });
   }
 
+  // Validate shortDescription length
   if (shortDescription.length < 10) {
     return res.status(400).json({
       status: false,
-      message: 'Short Description must be at least 10 characters long'
-    })
+      message: 'Short Description must be at least 10 characters long',
+    });
   }
-  // console.log("shortdesc::",shortDescription);
-
-  // Validate image URL format (basic check)
-  // const urlPattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z0-9]{2,4}(\/[\w-]*)*\/?$/i;
-  // if (!urlPattern.test(image)) {
-  //     return res.status(400).json({
-  //         status: false,
-  //         message: "Invalid image URL format",
-  //     });
-  // }
-  // console.log("URL_Pattren", image);
 
   try {
-    const existingService = await Services.findOne({ title: title })
+    const existingService = await Services.findOne({ title: title });
     if (existingService) {
       return res.status(400).json({
         status: false,
-        message: 'Service with this title already exists'
-      })
+        message: 'Service with this title already exists',
+      });
     }
 
-    const newService = new Services({ title, shortDescription, image })
-    await newService.save()
+    const newService = new Services({
+      title,
+      shortDescription,
+      image: `http://localhost:${process.env.PORT}/${image}`
+    });
+
+    await newService.save();
 
     return res.status(200).json({
       status: true,
-      message: 'New Service Added Successfully'
-    })
+      message: 'New Service Added Successfully',
+      data: newService,  
+    });
   } catch (error) {
-    console.error('Error adding service:', error)
+    console.error('Error adding service:', error);
     return res.status(500).json({
       status: false,
-      message: 'Internal Server Error'
-    })
+      message: 'Internal Server Error',
+      error: error.message,  
+    });
   }
-}
+};
 
 //get All-Services
 export const getAllServices = async (req, res) => {
