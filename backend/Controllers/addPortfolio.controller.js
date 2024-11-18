@@ -2,37 +2,45 @@ import Portfolio from '../Models/addPortfolio.models.js'
 import mongoose from 'mongoose'
 //add new portfolio 
 export const addPortfolio = async (req, res) => {
-  const { title, image, type } = req.body
+  const { title, type } = req.body;
+  const image = req.file ? req.file.path : "";
 
   if (!title || !image || !type) {
     return res.status(400).json({
       status: false,
-      message: 'All fields (title, image, type) are required'
-    })
+      message: "All fields (title, image, type) are required",
+    });
   }
-  if (!['Magento', 'Wordpress', 'Drupal', 'All'].includes(type)) {
+
+  if (!["Magento", "Wordpress", "Drupal", "All"].includes(type)) {
     return res.status(400).json({
       status: false,
-      message:
-        'Invalid type. Allowed types are Magento, Wordpress, Drupal, and All.'
-    })
+      message: "Invalid type. Allowed types are Magento, Wordpress, Drupal, and All.",
+    });
   }
 
   try {
-    const portfolio = new Portfolio({ title, image, type })
-    await portfolio.save()
+    const portfolio = new Portfolio({
+      title,
+      image: `http://localhost:${process.env.PORT}/${image}`, 
+      type,
+    });
+
+    await portfolio.save();
+
     return res.status(200).json({
       status: true,
-      message: 'Portfolio item added successfully'
-    })
+      message: "Portfolio item added successfully",
+      data: portfolio,
+    });
   } catch (error) {
-    console.error('Error adding portfolio item:', error)
+    console.error("Error adding portfolio item:", error);
     return res.status(500).json({
-      message: 'Internal Server Error'
-    })
+      status: false,
+      message: "Internal Server Error",
+    });
   }
-}
-
+};
 //get All Portfolio
 export const getAllPortfolioItems=async(req,res)=>{
   try {
@@ -63,7 +71,7 @@ export const getPortfolioById=async(req,res)=>{
           if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(400).json({
               status: false,
-              message: "Invalid service ID format",
+              message: "Invalid Portfolio ID format",
           });
           }
 
@@ -73,7 +81,7 @@ export const getPortfolioById=async(req,res)=>{
     if(!portfolio){
       return res.status(404).json({
         status:false,
-        message:"Service Not Found"
+        message:"Portfolio Not Found"
     })
     }
     return res.status(200).json({
@@ -89,48 +97,64 @@ export const getPortfolioById=async(req,res)=>{
 }
 
 //update portfolio items
-export const updatePortfolioItems=async(req,res)=>{
-  const {id}=req.params;
-  const { title, image, type}=req.body;
-  if(!mongoose.Types.ObjectId.isValid(id)){
+export const updatePortfolioItems = async (req, res) => {
+  const { id } = req.params;
+  const { title, type } = req.body;
+    const image = req.file ? req.file.path : null;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({
-      status:false,
-      message:"Invalid Portfolio Items ID format"
-    })
+      status: false,
+      message: "Invalid Portfolio Item ID format",
+    });
   }
-  
-  if(!title && !image && !type){
-    return res.status(400).json({
-      status:false,
-      message: 'At least one field (title, image, type) is required to update',
-  });
-  }
-  try {
-    const portfolio= await Portfolio.findById(id);
-    if(!portfolio){
-      return res.status(404).json({
-        status:false,
-        message:"Portfolio Item not found"
+
+    if (!title && !image && !type) {
+      return res.status(400).json({
+        status: false,
+        message: "At least one field (title, image, type) is required to update",
       });
     }
 
-    if(title) portfolio.title=title;
-    if(image) portfolio.image=image;
-    if(type) portfolio.type=type;
-    await portfolio.save();
+    if (type && !["Magento", "Wordpress", "Drupal", "All"].includes(type)) {
+      return res.status(400).json({
+        status: false,
+        message:
+          "Invalid type. Allowed types are Magento, Wordpress, Drupal, and All.",
+      });
+    }
 
-    return res.status(200).json({
-      status:true,
-      message:"Portfolio Item updated successfully"
-    })
-    
-  } catch (error) {
-    console.error('Error updating Portfolio:', error);
-    return res.status(500).json({
-      message:"Internal Server Error"
-    })
-  }
-}
+    try {
+      const portfolio = await Portfolio.findById(id);
+      if (!portfolio) {
+        return res.status(404).json({
+          status: false,
+          message: "Portfolio Item not found",
+        });
+      }
+
+      if (title) portfolio.title = title;
+      if (image){
+         portfolio.image = `http://localhost:${process.env.PORT}/${image}`;
+      }
+      if (type) portfolio.type = type;
+
+      await portfolio.save();
+
+      return res.status(200).json({
+        status: true,
+        message: "Portfolio Item updated successfully",
+        portfolio, 
+      });
+    } catch (error) {
+      console.error("Error updating Portfolio:", error);
+      return res.status(500).json({
+        status: false,
+        message: "Internal Server Error",
+        error: error.message, 
+      });
+    }
+};
 
 //delete portfolio items
 export const deletePortfolioItems=async(req,res)=>{
