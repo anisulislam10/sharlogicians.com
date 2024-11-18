@@ -7,7 +7,6 @@ export const addService = async (req, res) => {
   const { title, shortDescription } = req.body;
   const image = req.file ? req.file.path : ""; 
  
-  // Validate required fields
   if (!title || !shortDescription || !image) {
     return res.status(400).json({
       status: false,
@@ -15,7 +14,6 @@ export const addService = async (req, res) => {
     });
   }
 
-  // Validate title length
   if (title.length < 3) {
     return res.status(400).json({
       status: false,
@@ -23,7 +21,6 @@ export const addService = async (req, res) => {
     });
   }
 
-  // Validate shortDescription length
   if (shortDescription.length < 10) {
     return res.status(400).json({
       status: false,
