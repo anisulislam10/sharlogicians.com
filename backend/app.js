@@ -4,6 +4,7 @@ import connectDB from "./config/config.db.js";
 import AdminRoute from './Routes/admin.routes.js';
 import servicesRoutes from './Routes/addServices.routes.js';
 import portfolioRoutes from './Routes/addPortfolio.routes.js';
+import ourClientsRoutes from './Routes/ourClients.routes.js'
 import cookieParser from 'cookie-parser';
 import cors from "cors"; 
 import path from 'path'; 
@@ -29,6 +30,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/admin/auth", AdminRoute);
 app.use("/api/admin/services", servicesRoutes);
 app.use("/api/admin/portfolio", portfolioRoutes);
+app.use("/api/admin/client",ourClientsRoutes);
 
 const PORT = process.env.PORT || 4000;
 
