@@ -117,55 +117,71 @@ export const getServiceById = async(req,res)=>{
 }
 
 //update servie
-export const updateService= async(req,res)=>{
-    const {id}=req.params;
-    const{title, shortDescription, image}=req.body;
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({
-            status:false,
-            message:"Invalid Service ID Format"
-        })
+export const updateService = async (req, res) => {
+  const { id } = req.params;
+  const { title, shortDescription } = req.body;
+  const image = req.file ? req.file.path : null; 
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      status: false,
+      message: 'Invalid Service ID Format',
+    });
+  }
+
+  if (!title && !shortDescription && !image) {
+    return res.status(400).json({
+      status: false,
+      message: 'At least one field (title, shortDescription, image) is required to update',
+    });
+  }
+
+  if (title && title.length < 3) {
+    return res.status(400).json({
+      status: false,
+      message: 'Title must be at least 3 characters long',
+    });
+  }
+
+  if (shortDescription && shortDescription.length < 10) {
+    return res.status(400).json({
+      status: false,
+      message: 'Short Description must be at least 10 characters long',
+    });
+  }
+
+  try {
+    const service = await Services.findById(id);
+    if (!service) {
+      return res.status(404).json({
+        status: false,
+        message: 'Service not found',
+      });
     }
 
-    if(!title && !shortDescription && !image){
-        return res.status(400).json({
-            status:false,
-            message: 'At least one field (title, shortDescription, image) is required to update',
-        });
+    if (title) service.title = title;
+    if (shortDescription) service.shortDescription = shortDescription;
+    
+    if (image) {
+      service.image = `http://localhost:${process.env.PORT}/${image}`; 
     }
-    if(title &&  title.length<3){
-        return res.status(400).json({
-            status:false,
-            message: 'Short Description must be at least 10 characters long',
-        });
-    }
-    try {
-        const service = await Services.findById(id);
-        if (!service) {
-          return res.status(404).json({
-            status: false,
-            message: 'Service not found',
-          });
-        }
 
-        if(title) service.title=title;
-        if(shortDescription) service.shortDescription=shortDescription;
-        if(image) service.image=image;
-        await service.save();
+    await service.save(); 
+    return res.status(200).json({
+      status: true,
+      message: 'Service updated successfully',
+      service: service,
+    });
 
-        return res.status(200).json({
-            status: true,
-            message: 'Service updated successfully',
-            service: service,
-          });
-        
-    } catch (error) {
-        console.error('Error updating service:', error);
-        return res.status(500).json({
-            message:"Internal Server Error"
-        })
-    }
-}
+  } catch (error) {
+    console.error('Error updating service:', error);
+    return res.status(500).json({
+      status: false,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
 
 //delete service
 export const deleteService=async(req,res)=>{
