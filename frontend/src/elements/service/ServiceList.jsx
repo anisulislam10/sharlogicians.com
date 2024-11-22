@@ -54,7 +54,7 @@ const ServiceThree = ({ column, item }) => {
     useEffect(() => {
       const fetchServices = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/admin/services/get");
+          const response = await axios.get(import.meta.env.VITE_API_API_GET_SERVICES);
         //   console.log(response.data.services);
           setServicesData(response.data.services);
         } catch (error) {

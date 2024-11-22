@@ -99,7 +99,7 @@ class CreativeLanding extends Component {
   stickyHeader() {}
     // Custom method for fetching data
     componentDidMount() {
-      axios.get(`http://localhost:3000/api/admin/portfolio/get`)
+      axios.get(import.meta.env.VITE_API_API_GET_PORTFOLIO)
         .then(response => {
           this.setState({ data: response.data, isLoading: false });
         })

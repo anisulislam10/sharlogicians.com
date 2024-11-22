@@ -1,5 +1,6 @@
 import "./index.scss";
 import React, { useState } from "react";
+// import dotenv
 
 import "photoswipe/dist/photoswipe.css";
 import PageScrollTop from "./component/PageScrollTop";

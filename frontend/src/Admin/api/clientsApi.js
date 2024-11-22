@@ -1,6 +1,10 @@
 import axios from "axios";
+import process from "process";
 
-const API_BASE_URL = "http://localhost:3000/api/admin/client";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_CLIENT;
+console.log("client base url:", API_BASE_URL)
+// console.log('Environment:', process.env);
 
 // Fetch all Clients with pagination
 export const fetchClient = (page = 1, limit = 5) => {

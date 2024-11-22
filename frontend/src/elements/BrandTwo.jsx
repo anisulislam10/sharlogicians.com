@@ -11,7 +11,7 @@ const BrandTwo = () => {
   useEffect(() => {
     const fetchClient = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/admin/client/get");
+        const response = await axios.get(import.meta.env.VITE_API_API_GET_BRAND);
         setClient(response.data.ourClients); 
       } catch (error) {
         console.error("Error fetching client data:", error);

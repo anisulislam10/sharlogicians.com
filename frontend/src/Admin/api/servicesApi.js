@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/api/admin/services";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_SERVICES;
+console.log("API_BASE_URL",API_BASE_URL )
 // Fetch all services
 export const fetchServices = (page = 1, limit = 5) => {
     return axios.get(`${API_BASE_URL}/get`, {
