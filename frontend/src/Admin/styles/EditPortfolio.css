@@ -1,0 +1,109 @@
+/* CSS Variables for Theming */
+:root {
+    --primary-color: #4f8ef7;
+    --primary-hover-color: #3c7bd4;
+    --background-color: #f4f4f4;
+    --error-color: #ff4d4d;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+/* Edit Portfolio Page */
+.edit-portfolio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.edit-portfolio-page {
+    background-color: rgb(255, 248, 248);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Typography */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label, p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Inputs */
+input[type="text"],
+textarea,
+input[type="file"] {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+input[type="file"]:focus-visible {
+    outline: 2px solid var(--primary-color);
+}
+
+/* Buttons */
+button.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-portfolio-page {
+        padding: 20px;
+        width: 90%;
+    }
+
+    button.btn-primary {
+        padding: 10px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-portfolio-page {
+        padding: 15px;
+        margin-top: 120px;
+    }
+
+    button.btn-primary {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}

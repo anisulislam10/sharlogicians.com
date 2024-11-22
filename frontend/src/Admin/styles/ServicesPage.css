@@ -1,0 +1,23 @@
+.menu-content {
+    margin-top: 50px; /* Adds spacing above the Add button and table */
+    margin-left: 300px;
+    margin-top: 70px;
+    border-radius: 20px;
+    
+    /* Add border */
+    /* border: 2px solid rgb(255, 255, 255); You can change the color and thickness */
+    
+    /* Add box shadow */
+    box-shadow: 0 14px 18px rgba(0, 0, 0, 0.1); /* Horizontal offset, vertical offset, blur radius, spread, color */
+}
+
+
+.add-btn {
+    margin-top: 10px; /* Adds space below the Add button */
+    /* margin-left: 200px; */
+    margin-right: 40px;
+}
+
+table {
+    margin-top: 70px; /* Adds spacing below the Add button */
+}

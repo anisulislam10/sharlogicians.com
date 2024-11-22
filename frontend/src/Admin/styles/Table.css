@@ -1,0 +1,93 @@
+/* General table styles */
+table {
+    width:100%;
+    border-collapse: collapse;
+    margin-left: 5px;
+    font-size: 1rem;
+    font-family: "Arial", sans-serif;
+    text-align: left;
+    /* background-color: #f7f7f7; */
+    border-radius: 8px;
+    overflow: hidden;
+    /* box-shadow: 0 5px 16px rgba(139, 32, 32, 0.1); */
+    position: relative; /* Add relative positioning if required */
+}
+
+/* Table header styles */
+thead {
+    background-color: #275d96;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+thead th {
+    padding: 12px 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #dddddd;
+}
+
+/* Table body styles */
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+/* Image styles */
+tbody td img {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #dddddd;
+}
+
+/* Button styles */
+button {
+    /* padding: 8px 12px; */
+    /* margin: 0 4px; */
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 200px;
+    
+    /* margin-bottom: 100PX; */
+    /* margin-top: 100px */
+
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:first-of-type {
+    background-color: #28a745; /* Green for edit */
+}
+
+button:last-of-type {
+    background-color: #072cce; /* Red for delete */
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+
+    tbody td img {
+        max-width: 40px;
+        max-height: 40px;
+    }
+}

@@ -1,0 +1,123 @@
+/* Global Styles */
+* {
+    margin: 100;
+    padding: 0;
+    box-sizing: border-box;
+    
+
+}
+body{
+    /* background-color: #3cd449; */
+    margin-right: 1400px;
+}
+
+
+/* Edit Service Page */
+.edit-service-page {
+    background-color: rgb(255, 248, 248);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    /* max-width: 600px; */
+    margin-top: 165px;
+    margin-left: 300px;
+    /* padding-right: 100px; */
+}
+
+/* Title */
+.edit-service-page h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label */
+label {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Input and Textarea */
+input[type="text"],
+textarea,
+input[type="file"] {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: #4f8ef7;
+}
+
+/* Textarea Styles */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Current Image Display */
+p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Button Styles */
+button.btn-primary {
+    background-color: #4f8ef7;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #3c7bd4;
+}
+
+/* Loading/Error States */
+.loading, .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff4d4d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-service-page {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .form-group {
+        gap: 12px;
+    }
+
+    button.btn-primary {
+        padding: 10px 18px;
+    }
+}

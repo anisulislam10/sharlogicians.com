@@ -1,0 +1,195 @@
+/* Ensure no global background is applied */
+body {
+    background-image: none !important; /* Disable background image globally */
+    margin: 0; /* Remove any default body margin */
+}
+
+/* Container for the entire sign-in page */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    font-family: 'Arial', sans-serif;
+    margin: 0; /* Ensure there's no margin applied */
+}
+
+/* Box that holds the form */
+.signin-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Title of the sign-in box */
+.signin-box h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Form group container */
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+/* Labels for form inputs */
+.form-group label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Inputs for username and password */
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Input focus style */
+.form-group input:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.3);
+}
+
+/* Primary button styling */
+.btn-primary {
+    background-color: #2575fc;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+    width: 100%;
+}
+
+/* Button hover effect */
+.btn-primary:hover {
+    background-color: #1a5dbd;
+    transform: translateY(-2px);
+}
+
+/* Error message styling */
+.error-message {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .signin-box {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .signin-box h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.8rem;
+    }
+
+    .form-group input {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+    }
+}
+
+/* Tablet responsiveness */
+@media (max-width: 768px) {
+    .signin-box {
+        padding: 1.8rem;
+        max-width: 100%;
+    }
+
+    .signin-box h1 {
+        font-size: 1.6rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 0.75rem 1.3rem;
+    }
+}
+
+/* Laptop responsiveness */
+@media (max-width: 1024px) {
+    .signin-box {
+        padding: 2rem;
+        max-width: 90%;
+    }
+
+    .signin-box h1 {
+        font-size: 1.7rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* Large screen (desktop) responsiveness */
+@media (min-width: 1200px) {
+    .signin-box {
+        padding: 2rem;
+        max-width: 400px; /* Keeping the form width fixed on large screens */
+    }
+
+    .signin-box h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}

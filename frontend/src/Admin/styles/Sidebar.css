@@ -1,0 +1,67 @@
+/* Sidebar.css */
+.sidebar {
+    margin-top: 180px;
+    width: 200px;
+    /* background: #f4f4f452; */
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    margin-left: 70px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgba(0, 0, 0, 0.247); /* Specify the border width, style, and color */
+    border-radius: 17px; /* Apply rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.096); /* Apply shadow with offset and blur */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+
+
+.sidebar ul li {
+    padding: 13px;
+    cursor: pointer;
+}
+.sidebar ul li:hover {
+    padding: 13px;
+    cursor: pointer;
+    background: #e7dada8f;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: none;
+}
+.profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.username {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.email {
+    font-size: 0.9rem;
+    color: #666;
+}

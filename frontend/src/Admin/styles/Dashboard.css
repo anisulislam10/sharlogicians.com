@@ -1,0 +1,29 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background-color: rgb(16, 109, 109);
+    margin-top: 900px;
+    
+
+  }
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    
+    
+  }
+ 
+  body {
+    background-image: url('https://images.squarespace-cdn.com/content/v1/591d663de3df28c0ec87d4bc/1561093400493-1Y136O6AWS754R9XIZRV/BlueCorner_ProfessionalPrograms_Banner_2000px_Small.png?format=2500w');
+    background-size: cover; /* Makes the image cover the entire viewport */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Optional: Makes the background image stay fixed during scrolling */
+}
+.dashboard-text {
+  font-size: small;
+  border: none;
+  border-top: 1px solid black; /* You can change color and thickness */
+  margin: 20px 0; /* Add spacing above and below the line */
+  padding-bottom: 10px; /* Adds space below the line */
+  text-align: center;
+}
