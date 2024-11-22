@@ -45,20 +45,30 @@ export const addClient = async (req, res) => {
 
 // get All Clients
 export const getAllClients= async(req,res)=>{
+    const { skip = 0, limit = 15 } = req.query; // Receive skip and limit from query params
+
     try {
-        const ourClients = await OurClient.find();
+        const ourClients = await OurClient.find()
+        .sort({ createdAt: -1 }) // Sorting by createdAt in descending order
+        .skip(parseInt(skip)) // Skip the first 'skip' number of results (for pagination)
+        .limit(parseInt(limit)); // Limit the number of items returned
         if(!ourClients){
             return res.status(400).json({
                 status:false,
                 message:"No Client found"
             })
         }
+
+        const total = await OurClient.countDocuments();
+
         return res.status(200).json({
             status:true,
-            ourClients:ourClients
+            ourClients:ourClients,
+            total: total, // Send total count for pagination
+
         })
     } catch (error) {
-        console.log("Error:", error);
+        console.log("Error:", error)
         message:"Internal Server Error"
         
     }

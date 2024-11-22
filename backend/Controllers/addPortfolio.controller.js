@@ -5,12 +5,12 @@ export const addPortfolio = async (req, res) => {
   const { title, type } = req.body;
   const image = req.file ? req.file.path : "";
 
-  if (!title || !image || !type) {
-    return res.status(400).json({
-      status: false,
-      message: "All fields (title, image, type) are required",
-    });
-  }
+  // if (!title || !image || !type) {
+  //   return res.status(400).json({
+  //     status: false,
+  //     message: "All fields (title, image, type) are required",
+  //   });
+  // }
 
   if (!["Magento", "Wordpress", "Drupal", "All"].includes(type)) {
     return res.status(400).json({
@@ -42,26 +42,41 @@ export const addPortfolio = async (req, res) => {
   }
 };
 //get All Portfolio
-export const getAllPortfolioItems=async(req,res)=>{
+// get All Portfolio
+export const getAllPortfolioItems = async (req, res) => {
+  const { skip = 0, limit = 5 } = req.query; // Receive skip and limit from query params
+
   try {
-    const portfolio= await Portfolio.find();
-    if(!portfolio || portfolio.length===0){
-      return res.status(400).json({
-        status:false,
-        message:"Portfolio Item not found"
+    // Fetch portfolio items with pagination
+    const portfolio = await Portfolio.find()
+      .sort({ createdAt: -1 }) // Sorting by createdAt in descending order
+      .skip(parseInt(skip)) // Skip the first 'skip' number of results (for pagination)
+      .limit(parseInt(limit)); // Limit the number of items returned
+
+    if (!portfolio || portfolio.length === 0) {
+      return res.status(404).json({
+        status: false,
+        message: "No portfolio items found",
       });
     }
+
+    // Get total count of portfolio items for pagination
+    const total = await Portfolio.countDocuments();
+
     return res.status(200).json({
-      status:true,
-      portfolio:portfolio
-    })
+      status: true,
+      portfolio: portfolio,
+      total: total, // Send total count for pagination
+    });
   } catch (error) {
-    return status(500).json({
-      message:"Internal Server Error"
-    })
-    
+    console.error("Error fetching portfolio items:", error);
+    return res.status(500).json({
+      status: false,
+      message: "Internal Server Error",
+    });
   }
-}
+};
+
 
 //get portfolio items by id
 export const getPortfolioById=async(req,res)=>{
@@ -86,7 +101,8 @@ export const getPortfolioById=async(req,res)=>{
     }
     return res.status(200).json({
       status:true,
-      portfolio:portfolio
+      portfolio:portfolio,
+
   })
   } catch (error) {
     return res.status(500).json({

@@ -11,7 +11,7 @@ import upload from '../Middleware/multer.middleware.js';
 const router=express.Router();
 
 // Add portfolio Route (with Multer middleware for file upload)
-router.route("/post").post(verifyAdminToken,
+router.route("/post").post(
     upload.single("image"),
     addPortfolio
 );
@@ -20,11 +20,11 @@ router.route("/post").post(verifyAdminToken,
 router.route("/get").get(getAllPortfolioItems)
 router.route("/:id").get(getPortfolioById)
 
-router.route("/update/:id").put(verifyAdminToken,
+router.route("/update/:id").put(
     upload.single('image'),
     updatePortfolioItems)
 
-router.route("/delete/:id").delete(verifyAdminToken,deletePortfolioItems)
+router.route("/delete/:id").delete(deletePortfolioItems)
 
 
 export default router

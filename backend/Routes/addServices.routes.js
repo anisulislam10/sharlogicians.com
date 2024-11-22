@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Add Service Route (with Multer middleware for file upload)
 router.route("/post").post(
-  verifyAdminToken, 
+  
   upload.single("image"), 
   addService 
 );
@@ -23,10 +23,9 @@ router.route("/:id").get(getServiceById);
 
 // Multer middleware for handling image upload
 router.route("/update/:id").put(
-    verifyAdminToken, 
     upload.single('image'), 
     updateService 
   );
-router.route("/delete/:id").delete(verifyAdminToken, deleteService);
+router.route("/delete/:id").delete(deleteService);
 
 export default router;

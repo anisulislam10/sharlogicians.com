@@ -14,7 +14,7 @@ const router = express.Router();
 
 // Add Client Route (with Multer middleware for file upload)
 router.route("/post").post(
-  verifyAdminToken,  
+  
   upload.single("image"),  
   addClient  
 );
@@ -23,7 +23,7 @@ router.route("/get").get(getAllClients)
 router.route("/:id").get(getClientById)
 
 router.route("/update/:id").put(
-  verifyAdminToken,
+  
   upload.single("image"),
   updateClient
 )
